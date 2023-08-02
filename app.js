@@ -9,10 +9,13 @@ else console.log('larger than 10');
 console.log(__dirname);
 
 
-sayHi(names.sahar)
+sayHi(names.sahar);
 
-const os = require('os')
+const os = require('os');
 
-const user = os.userInfo()
-console.log(user)
-console.log(names)
+const user = os.userInfo();
+console.log(os.uptime());
+
+console.log(user);
+
+console.log(names);
