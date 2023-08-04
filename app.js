@@ -21,22 +21,35 @@ const user = os.userInfo();
 //console.log(names);
 
 const currentOs = {
-    name : os.type(),
+    name: os.type(),
     release: os.release(),
-    totalMem : os.totalmem(),
-    freeMem : os.freemem()
+    totalMem: os.totalmem(),
+    freeMem: os.freemem()
 }
 //console.log(currentOs)
 
 const path = require('path')
 
 //console.log(path.sep)
-const filePath = path.join('/content' , 'subFolder', 'text.txt')
+const filePath = path.join('/content', 'subFolder', 'text.txt')
 //console.log(filePath)
 
 const base = path.basename(filePath)
 //console.log(base)
 
-const absolute = path.resolve(__dirname , 'content' , 'subFolder', 'text.txt')
+const absolute = path.resolve(__dirname, 'content', 'subFolder', 'text.txt')
 //console.log(absolute)
+//-----------------------------------------------------------------------------------------------
 
+const {readFile, writeFile} = require("fs");
+
+readFile('./content/first.txt',"utf-8", (err, result) => {
+    if (err) {
+        console.log(err)
+        return true
+    }
+    console.log(result)
+})
+
+
+//-----------------------------------------------------------------------------------------------------------------------
