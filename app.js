@@ -40,16 +40,4 @@ const base = path.basename(filePath)
 const absolute = path.resolve(__dirname, 'content', 'subFolder', 'text.txt')
 //console.log(absolute)
 //-----------------------------------------------------------------------------------------------
-
-const {readFile, writeFile} = require("fs");
-
-readFile('./content/first.txt',"utf-8", (err, result) => {
-    if (err) {
-        console.log(err)
-        return true
-    }
-    console.log(result)
-})
-
-
-//-----------------------------------------------------------------------------------------------------------------------
+require("./fs_async")
