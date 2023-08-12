@@ -40,4 +40,40 @@ const base = path.basename(filePath)
 const absolute = path.resolve(__dirname, 'content', 'subFolder', 'text.txt')
 //console.log(absolute)
 //-----------------------------------------------------------------------------------------------
-require("./fs_async")
+//require("./fs_async")
+const http = require('http');
+const server = http.createServer((req,res) => {
+    if (req.url === '/') res.end("Welcome to our Home page!")
+    //res.write("Hello , this is our Home page!")
+    //res.end()
+    if (req.url === '/about') res.end("Welcome to our About page!")
+
+    res.end(`<h1> ooooops ! </h1>`)
+})
+server.listen(5000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
