@@ -41,26 +41,49 @@ const absolute = path.resolve(__dirname, 'content', 'subFolder', 'text.txt')
 //console.log(absolute)
 //-----------------------------------------------------------------------------------------------
 //require("./fs_async")
-const http = require('http');
-const server = http.createServer((req,res) => {
-    if (req.url === '/') res.end("Welcome to our Home page!")
-    //res.write("Hello , this is our Home page!")
-    //res.end()
-    if (req.url === '/about') res.end("Welcome to our About page!")
+// const http = require('http');
+// const server = http.createServer((req,res) => {
+//     if (req.url === '/') res.end("Welcome to our Home page!")
+//     //res.write("Hello , this is our Home page!")
+//     //res.end()
+//     if (req.url === '/about') res.end("Welcome to our About page!")
+//
+//     res.end(`<h1> ooooops ! </h1>`)
+// })
+// server.listen(5000)
+//
+//
+// const _ = require('lodash')
+// const items = [1 , [2 , [3 , [4]]]]
+// const newItems = _.flattenDeep(items)
+// console.log(newItems)
+//-----------------------------------------------------------------------------------------------------
 
-    res.end(`<h1> ooooops ! </h1>`)
+const http = require('http')
+
+
+const server = http.createServer((req,res)=>{
+    if (req.url === '/'){
+        res.end("Home Page")
+    }
+    if (req.url === '/about'){
+        //BLOCKING CODE!!!
+        for (let i=0 ; i< 1000 ; i++){
+            for (let j=0 ; j < 1000 ; j++ ){
+                console.log(`${i} - ${j}`)
+            }
+        }
+        res.end('About Page')
+    }
+
+    res.end("Error Page!")
+
 })
-server.listen(5000)
 
 
-const _ = require('lodash')
-const items = [1 , [2 , [3 , [4]]]]
-const newItems = _.flattenDeep(items)
-console.log(newItems)
-
-
-
-
+server.listen(5000 , ()=>{
+    console.log("Server is listening on port 5000")
+})
 
 
 
