@@ -35,3 +35,4 @@ getText('./content/first.txt')
     .catch((err)=> console.log(err))
 
 
+//async await
