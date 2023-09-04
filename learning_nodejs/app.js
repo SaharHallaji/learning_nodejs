@@ -62,14 +62,15 @@ const absolute = path.resolve(__dirname, 'content', 'subFolder', 'text.txt')
 const http = require('http')
 
 
-const server = http.createServer((req,res)=>{
-    if (req.url === '/'){
+/*
+const server = http.createServer((req, res) => {
+    if (req.url === '/') {
         res.end("Home Page")
     }
-    if (req.url === '/about'){
+    if (req.url === '/about') {
         //BLOCKING CODE!!!
-        for (let i=0 ; i< 1000 ; i++){
-            for (let j=0 ; j < 1000 ; j++ ){
+        for (let i = 0; i < 1000; i++) {
+            for (let j = 0; j < 1000; j++) {
                 console.log(`${i} - ${j}`)
             }
         }
@@ -81,9 +82,69 @@ const server = http.createServer((req,res)=>{
 })
 
 
-server.listen(5000 , ()=>{
+server.listen(5000, () => {
     console.log("Server is listening on port 5000")
 })
+*/
+
+
+require("./fs_sync")
+
+const EventEmitter = require("events");
+const customEmitter = new EventEmitter()
+
+customEmitter.on('response', (name, age) => {
+    console.log(`data received :  ${name} - ${age}`)
+})
+
+customEmitter.emit('response', 'john', 34)
+
+
+const {createReadStream} = require("fs")
+
+const stream = createReadStream('./content/big.txt', {highWaterMark: 9000, encoding: 'utf-8'})
+
+stream.on('data', (result) => {
+    console.log(result)
+})
+stream.on("error", (err) => {
+    console.log(err)
+})
+
+// -----------------------------------------------------------------------------------------------------------------
+
+
+const fs = require("fs")
+http
+    .createServer((req, res) => {
+        const fileStream = fs.createReadStream('./content/big.txt', 'utf-8')
+        fileStream.on('open', () => {
+            fileStream.pipe(res)
+        })
+        fileStream.on("error" , (err)=>{
+            res.end(err)
+        })
+    })
+    .listen(5000)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
