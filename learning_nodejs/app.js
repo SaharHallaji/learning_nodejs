@@ -1,5 +1,6 @@
 const names = require('./names')
 const sayHi = require('./utiles')
+const fs = require('fs')
 //require('./numbers')
 const amount = 12;
 
@@ -101,18 +102,22 @@ customEmitter.emit('response', 'john', 34)
 
 
 const {createReadStream} = require("fs")
+const {home} = require("nodemon/lib/utils");
 
-const stream = createReadStream('./content/big.txt', {highWaterMark: 9000, encoding: 'utf-8'})
+//const stream = createReadStream('./content/big.txt', {highWaterMark: 9000, encoding: 'utf-8'})
 
+/*
 stream.on('data', (result) => {
     console.log(result)
 })
 stream.on("error", (err) => {
     console.log(err)
 })
+*/
 
 // -----------------------------------------------------------------------------------------------------------------
 
+/*
 
 const fs = require("fs")
 http
@@ -127,11 +132,29 @@ http
     })
     .listen(5000)
 
+*/
+/*
+http.createServer((req, res) => {
+
+    if (req.url === '/') {
+        res.writeHead(200, {'content-type': 'text/html'})
+        res.write(`<h1>hello world <br> ${req.url} <br> ${req.method} </h1>`)
+
+    } else {
+        res.writeHead(404, {'content-type': 'text/html'})
+        res.write(`<h1>not found - 404 <br> ${req.url} <br> ${req.method} </h1>`)
+    }
+    res.end()
+}).listen(5000)
 
 
+*/
+const homePage = fs.readFileSync('./index.html' )
 
-
-
+http.createServer((req, res)=>{
+    res.write(homePage)
+    res.end()
+}).listen(5000)
 
 
 

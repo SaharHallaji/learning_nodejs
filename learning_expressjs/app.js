@@ -1,8 +1,19 @@
-const http = require('http')
+const app = require('express')();
 
-const server = http.createServer((req, res)=>{
-    console.log("user hit the server")
+app.get('/',(req, res)=>{
+    res.json([{name: 'sahar'} , {name: 'mmd'}])
 })
-server.listen(5000)
 
+app.get('/api/products/:productID',(req, res)=>{
+    console.log(req.params)
+    res.send('hi')
+})
+app.get('/api/v1/query',(req,res)=>{
+    // http://localhost:5000/api/v1/query?name=sahar&lastName=hallaji
+    console.log(req.query)
+    res.send('query')
+})
+app.listen(5000,()=>{
+    console.log("port 5000 is running...! ")
+})
 
